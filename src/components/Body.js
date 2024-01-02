@@ -5,8 +5,8 @@ import { useState, useEffect } from "react"
 const Body = ()=>{
  //    const arr = useState(list)
  //    const[listofRestaurants, setListOfRestaurant] = arr; 
- //   const[listofRestaurants, setListOfRestaurant] = useState(resList); // line 7 & 8 = 9
-    const[listofRestaurants, setListOfRestaurant] = useState([]); // if u not want data from mock then use it as
+ //   const[listofRestaurants, setListOfRestaurant] = useState(resList); // line 7 & 8 = 9 
+    const[listofRestaurants, setListOfRestaurant] = useState([]); // if u not want data from mock then use it as hritk
       
 useEffect(()=>{
   fetchData();
