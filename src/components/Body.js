@@ -1,46 +1,26 @@
 import RestaurantCard from "../RestaurantCard"
 import resList  from "../utils/mockData"
-import { useState } from "react"
-import resList from "../utils/mockData"
+import { useState, useEffect } from "react"
 
 const Body = ()=>{
  //    const arr = useState(list)
  //    const[listofRestaurants, setListOfRestaurant] = arr; 
-    const[listofRestaurants, setListOfRestaurant] = useState(resList); // line 7 & 8 = 9
+ //   const[listofRestaurants, setListOfRestaurant] = useState(resList); // line 7 & 8 = 9
+    const[listofRestaurants, setListOfRestaurant] = useState([]); // if u not want data from mock then use it as
       
-//  let listofRestaurants = [
-//     {
-//         "info": {
-//           "id": "65797",
-//           "name": "Leon's - Burgers & Wings (Leon Grill)",
-//           "cloudinaryImageId": "b2edbc28b7b8219d6e0a9c049ce06658",
-//           "costForTwo": "₹300 for two",
-//           "cuisines": [
-//             "American",
-//             "Snacks",
-//             "Turkish",
-//             "Portuguese",
-//             "Continental"
-//           ],
-//           "avgRatingString": "4.4",
-//         }}, 
-//         {
-//             "info": {
-//               "id": "65798",
-//               "name": "KFC",
-//               "cloudinaryImageId": "b2edbc28b7b8219d6e0a9c049ce06658",
-//               "costForTwo": "₹300 for two",
-//               "cuisines": [
-//                 "American",
-//                 "Snacks",
-//                 "Turkish",
-//                 "Portuguese",
-//                 "Continental"
-//               ],
-//               "avgRatingString": "4.7",
-//             }}
+useEffect(()=>{
+  fetchData();
+},[]);
 
-//  ]
+const fetchData = async () =>{
+  const data = await fetch(
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+  );
+  const jsons = await data.json();
+
+  console.log(jsons);
+   setListOfRestaurant(jsons.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
+}
    
     return (
       <div className="body ">
@@ -55,7 +35,7 @@ const Body = ()=>{
 
       <div className="res-container">
          {listofRestaurants.map((restaurant)=>(   // it is the loop
-          <RestaurantCard key={restaurant.info.id} resData = {restaurant} /> 
+          <RestaurantCard key={restaurant.info.id} ResData = {restaurant} /> 
          ))}  
       </div> 
       </div>
