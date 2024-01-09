@@ -18,8 +18,8 @@ const fetchData = async () =>{
    );
   const jsons = await data.json();
   console.log(jsons);
-   setListOfRestaurant(jsons?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-   setfilterRestaurants(jsons?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+   setListOfRestaurant(jsons?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+   setfilterRestaurants(jsons?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 }    
 
    if(listofRestaurants===0) {
