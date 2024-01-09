@@ -1,4 +1,4 @@
-import {CDN_URL} from "./utils/constant";
+import { CDN_URL } from "../utils/constant";
 
 const RestaurantCard = (props)=>{
     const{ResData} = props;
@@ -7,6 +7,7 @@ const RestaurantCard = (props)=>{
     avgRatingString,
     costForTwo,
     cuisines,
+    locality,
     name
   } = ResData.info;
   return(
@@ -15,6 +16,7 @@ const RestaurantCard = (props)=>{
       <h3>{name}</h3>
       <h4> AvgRating : {avgRatingString}</h4>
       <h4>{costForTwo}</h4>
+      <h4>locality : {locality}</h4>
       <h4>{cuisines.join(", ")}</h4>
       </div>
   )

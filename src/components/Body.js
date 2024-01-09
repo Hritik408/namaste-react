@@ -1,46 +1,81 @@
-import RestaurantCard from "../RestaurantCard"
-import resList  from "../utils/mockData"
+import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react"
+import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStaus";
 
 const Body = ()=>{
- //    const arr = useState(list)
- //    const[listofRestaurants, setListOfRestaurant] = arr; 
- //   const[listofRestaurants, setListOfRestaurant] = useState(resList); // line 7 & 8 = 9 
-    const[listofRestaurants, setListOfRestaurant] = useState([]); // if u not want data from mock then use it as hritk
+    const[listofRestaurants, setListOfRestaurant] = useState([]); 
+    const[filterRestaurants, setfilterRestaurants] = useState([]);  
       
-useEffect(()=>{
-  fetchData();
-},[]);
+    const[searchText, setsearchText] = useState("");
+
+   useEffect(()=>{fetchData()}, []);
 
 const fetchData = async () =>{
   const data = await fetch(
-    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-  );
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.9844618&lng=77.7064137&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+   );
   const jsons = await data.json();
-
   console.log(jsons);
-   setListOfRestaurant(jsons.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
+   setListOfRestaurant(jsons?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+   setfilterRestaurants(jsons?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+}    
+
+   if(listofRestaurants===0) {
+    <Shimmer />
+   }
+
+   const text = (event) => {
+    setsearchText(event.target.value);
 }
-   
-    return (
-      <div className="body ">
+
+   const searchName = () => {
+    const filterRestro = listofRestaurants.filter((res) =>(
+       res.info.name.toLowerCase().includes(searchText.toLowerCase())
+     ) )
+       setfilterRestaurants(filterRestro);
+    }
+
+   const avgRating = ()=> {
+      const filterdList = listofRestaurants.filter((res)=>(
+        res.info.avgRatingString > 4.1
+      )) 
+       setfilterRestaurants(filterdList);
+   }
+
+   const onlineStaus = useOnlineStatus();
+   if(onlineStaus === false) 
+   return (<h1>Looks like you are offline !! Please check the internet</h1>);
+
+      return  (listofRestaurants.length===0) ? (<Shimmer />) :  (
+      <div className="body">
       <div className="filter">
-        <button className="filter-btn" onClick={()=>{
-            const filterdList = listofRestaurants.filter(
-                (hri) => hri.info.avgRatingString > 4.3  // display the card whose rating is more than 4
-            )
-            setListOfRestaurant(filterdList);
-        }}>Top Rated Restaurant</button>
+
+        <div className="search">
+          <input type="text" className="search-box" placeholder="Search" value={searchText} onChange={text}> 
+          </input>
+          <button className="search-btn" onClick = {searchName} > Click me </button>
+        </div>
+
+        <button className="filter-btn" onClick = {avgRating}> Top Rated Restaurant </button>
       </div>
 
-      <div className="res-container">
-         {listofRestaurants.map((restaurant)=>(   // it is the loop
-          <RestaurantCard key={restaurant.info.id} ResData = {restaurant} /> 
-         ))}  
-      </div> 
+    <div className="res-container">
+      {filterRestaurants.map((rest) => (
+        <Link
+         key={rest.info.id} to={"/restaurant/" + rest.info.id}>
+        {<RestaurantCard ResData = {rest} />}
+        </Link>
+      ))
+      } 
+    </div>
+    
       </div>
     )
   }
-  export default Body
+  export default Body 
 
-   {/* <RestaurantCard resData = {resList[1]} /> <RestaurantCard resData = {resList[15]} />*/}
+
+
+
