@@ -2,8 +2,8 @@ import ItemList from "./ItemList";
 
 const RestCatagories = ({data, showItems, setshowIndex, jaat}) => {   // restCatagories is control by restMenu & if this has own state then it is uncontrol
     //  console.log(data);
-   const handleClick = () => setshowIndex(jaat);
- //  const handleClick = () => setshowIndex();
+ //  const handleClick = () => setshowIndex(jaat);
+   const handleClick = () => setshowIndex();
 
     return (
         <div>

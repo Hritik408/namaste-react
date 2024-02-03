@@ -12,7 +12,7 @@ class UserClass extends React.Component {
             // location : "meerut" // if we nothing put inside userInfo then there is no change in final input
             }
         } 
-       console.log("construct is called")
+     //  console.log("construct is called")
     }
 
 
@@ -34,14 +34,14 @@ class UserClass extends React.Component {
 
 
       componentDidUpdate(){
-        console.log("componentdDidUpdate is called");
+    //    console.log("componentdDidUpdate is called");
       }
 
       
 
       componentWillUnmount(){
         clearInterval(this.timer)   // it is imp bcz whn u go to another page then it stops & when u come again then it start 
-        console.log("componentWillUnmount is called");
+    //    console.log("componentWillUnmount is called");
       }
 
     
@@ -68,7 +68,7 @@ class UserClass extends React.Component {
                <h3>Count : {count}</h3>
                 <button onClick={couInc} className="cou-btn">countInc</button>
                </div>
-                <img className="avatar" src={avatar_url} />
+                <img className="w-44 h-44" src={avatar_url} />
             </div>
         )
     }

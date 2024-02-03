@@ -13,7 +13,7 @@ const RestMenu = () => {
 
  //   const[showIndex, setshowIndex] = useState(false);
  //  const[showIndex, setshowIndex] = useState(true);
-   const[showIndex, setshowIndex] = useState(null);
+   const[showIndex, setshowIndex] = useState(true);
   
 
     if(resdata === null)  return <Shimmer />
@@ -39,12 +39,13 @@ const RestMenu = () => {
           <RestCatagories 
           key={catagory?.card?.card?.title} 
           data = {catagory?.card?.card}
-        //  jaat = {index} 
-        showItems = {index === showIndex ? true : false} 
-            setshowIndex = {(val) => setshowIndex(showIndex === value ? index : value)}
+          jaat = {index} 
+          showItems = {index === showIndex ? true : false} 
+        //  showItems={showIndex === index}
+        //  setshowIndex={(value) => setshowIndex(value === index ? null : value)}
+        setshowIndex = {(value) => setshowIndex(showIndex === value ? index : value)}
        //     setshowIndex = {() => setshowIndex(index)}   // this is for only one open and other will be closed
-      //   setshowIndex = {(value)=> setshowIndex((value) = !value)}
-  //    setshowIndex={(val) => !val}
+        
          />
         ))}
 
