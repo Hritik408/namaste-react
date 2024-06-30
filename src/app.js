@@ -10,19 +10,19 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import RestMenu from "./components/RestMenu"; 
 import UserContext from "./utils/UserContext";
 
-
-  const Grocery = lazy(() => import("./components/Grocery"));  // lazy fun is used to import grocery
+     
+const Grocery = lazy(() => import("./components/Grocery"));  // lazy fun is used to import grocery
 
 
 const AppLayout = ()=>{
 
   const[UserName, setUserName] = useState();
-
+                               
   useEffect(()=>{
       const data = {
         name: ""
       };
-       setUserName(data.name);
+       setUserName(data.name);                                    
   }, [])
 
   return(
@@ -65,4 +65,4 @@ const AppLayout = ()=>{
 
   const root = ReactDOM.createRoot(document.getElementById("root"))
 
-root.render(<RouterProvider router={appRoute} />)
+   root.render(<RouterProvider router={appRoute} />)
