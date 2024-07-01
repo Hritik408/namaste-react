@@ -9,6 +9,8 @@ import Contact from "./components/Contact";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom"; 
 import RestMenu from "./components/RestMenu"; 
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
      
 const Grocery = lazy(() => import("./components/Grocery"));  // lazy fun is used to import grocery
@@ -25,13 +27,15 @@ const AppLayout = ()=>{
        setUserName(data.name);                                    
   }, [])
 
-  return(
+  return( // it take store as a props
+    <Provider store = {appStore} >  
     <UserContext.Provider value={{loggedInUser: UserName, setUserName}}>  {/* here provider help to provide the data inside to app over the components */}
      <div className="app">
     <Header/>
     <Outlet />  {/** path of children change -> outlet filled with children element  */} 
   </div>
   </UserContext.Provider>
+  </Provider>
   )
 }
 

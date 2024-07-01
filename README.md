@@ -35,3 +35,15 @@ This function creates a new context object. It takes an optional argument, which
 jsx
 Copy code
 const MyContext = React.createContext(defaultValue);
+
+# 2 types Routing in web apps
+ - client side routing
+ - server side routing
+
+ # Redux toolkit
+ - Install @reduxjs/toolkit and react-redux
+ - Build our store
+ - connect our store to our app
+ - slice (cartSlice)
+ - dispatch(action)
+ - Selector

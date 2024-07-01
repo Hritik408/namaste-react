@@ -18,13 +18,13 @@ const RestMenu = () => {
 
     if(resdata === null)  return <Shimmer />
     
-     const {name, cuisines, costForTwoMessage} = resdata?.cards[0]?.card?.card?.info;
+     const {name, cuisines, costForTwoMessage} = resdata?.cards[2]?.card?.card?.info;
 
   //   const {itemCards} = resdata?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
    //  console.log(itemCards);
      
-       const Catagories = resdata?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => (
+       const Catagories = resdata?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => (
         c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"   // if @ comes then use [""]
        ));
    //    console.log(Catagories);
